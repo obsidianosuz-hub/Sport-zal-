@@ -1,0 +1,31 @@
+{
+  "nav": {
+    "dashboard": "Bosh Sahifa",
+    "employees": "Xodimlar",
+    "clients": "Mijozlar",
+    "kitchen": "BAR",
+    "inventory": "Ombor",
+    "settings": "Sozlamalar"
+  },
+  "auth": {
+    "logout": "Tizimdan chiqish",
+    "admin": "Administrator"
+  },
+  "settings": {
+    "title": "Tizim Sozlamalari",
+    "general": "Umumiy (UI/UX)",
+    "employees": "Xodimlar & Ruxsatlar",
+    "security": "Xavfsizlik & PIN",
+    "ui_title": "Tashqi ko'rinish va Tillar",
+    "sys_lang": "Tizim tili",
+    "theme": "Mavzu",
+    "theme_dark": "Qorong'i (Dark - Cyber Glass)",
+    "theme_light": "Yorug' (Light)",
+    "scale_title": "UI va Shrift o'lchamlari",
+    "scale_small": "Kichik (Aa)",
+    "scale_medium": "O'rtacha (Aa)",
+    "scale_large": "Katta (Aa)",
+    "save": "O'zgarishlarni Saqlash",
+    "success": "UI sozlamalari saqlandi!"
+  }
+}

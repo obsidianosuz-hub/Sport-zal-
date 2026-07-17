@@ -1,0 +1,31 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "employees": "Employees",
+    "clients": "Clients",
+    "kitchen": "Kitchen",
+    "inventory": "Inventory",
+    "settings": "Settings"
+  },
+  "auth": {
+    "logout": "Log Out",
+    "admin": "Administrator"
+  },
+  "settings": {
+    "title": "System Settings",
+    "general": "General (UI/UX)",
+    "employees": "Employees & Permissions",
+    "security": "Security & PIN",
+    "ui_title": "Appearance and Languages",
+    "sys_lang": "System Language",
+    "theme": "Theme",
+    "theme_dark": "Dark (Cyber Glass)",
+    "theme_light": "Light",
+    "scale_title": "UI and Font Sizes",
+    "scale_small": "Small (Aa)",
+    "scale_medium": "Medium (Aa)",
+    "scale_large": "Large (Aa)",
+    "save": "Save Changes",
+    "success": "UI settings saved successfully!"
+  }
+}

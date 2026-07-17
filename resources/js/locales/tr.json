@@ -1,0 +1,31 @@
+{
+  "nav": {
+    "dashboard": "Ana Sayfa",
+    "employees": "Çalışanlar",
+    "clients": "Müşteriler",
+    "kitchen": "Mutfak",
+    "inventory": "Envanter",
+    "settings": "Ayarlar"
+  },
+  "auth": {
+    "logout": "Çıkış Yap",
+    "admin": "Yönetici"
+  },
+  "settings": {
+    "title": "Sistem Ayarları",
+    "general": "Genel (UI/UX)",
+    "employees": "Çalışanlar & İzinler",
+    "security": "Güvenlik & PIN",
+    "ui_title": "Görünüm ve Diller",
+    "sys_lang": "Sistem Dili",
+    "theme": "Tema",
+    "theme_dark": "Koyu (Cyber Glass)",
+    "theme_light": "Açık",
+    "scale_title": "UI ve Yazı Tipleri",
+    "scale_small": "Küçük (Aa)",
+    "scale_medium": "Orta (Aa)",
+    "scale_large": "Büyük (Aa)",
+    "save": "Değişiklikleri Kaydet",
+    "success": "UI ayarları kaydedildi!"
+  }
+}

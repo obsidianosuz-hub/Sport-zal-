@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.theme-light {
+    --tw-text-opacity: 1 !important;
+    color: #111827 !important; /* text-gray-900 */
+}
+
+.theme-light .text-white:not(button) {
+    color: #111827 !important; /* text-gray-900 */
+}
+
+.theme-light button.text-white {
+    color: #ffffff !important;
+}
+
+.theme-light .text-gray-300 {
+    color: #374151 !important; /* text-gray-700 */
+}
+
+.theme-light .text-gray-400 {
+    color: #4b5563 !important; /* text-gray-600 */
+}
+
+.theme-light .text-gray-500 {
+    color: #6b7280 !important; /* text-gray-500 */
+}
+
+.theme-light .bg-gray-900 {
+    background-color: #ffffff !important; /* white */
+}
+
+.theme-light .theme-bg-overlay {
+    background: rgba(255, 255, 255, 0.9) !important;
+}
+
+.theme-light .bg-white\/5,
+.theme-light .bg-black\/30,
+.theme-light .bg-black\/40,
+.theme-light .bg-black\/60 {
+    background-color: rgba(243, 244, 246, 0.9) !important; /* gray-100 */
+    border-color: rgba(209, 213, 219, 1) !important; /* gray-300 */
+    color: #111827 !important;
+}
+
+.theme-light .border-white\/10,
+.theme-light .border-white\/5 {
+    border-color: rgba(209, 213, 219, 1) !important; /* gray-300 */
+}
+
+/* Green Accents */
+.theme-light .text-blue-400,
+.theme-light .text-purple-400,
+.theme-light .text-blue-500,
+.theme-light .text-purple-500 {
+    color: #059669 !important; /* emerald-600 */
+}
+
+.theme-light .border-blue-500 {
+    border-color: #059669 !important;
+}
+
+.theme-light .from-blue-600,
+.theme-light .from-blue-500,
+.theme-light .from-purple-600,
+.theme-light .from-purple-500 {
+    --tw-gradient-from: #10b981 !important; /* emerald-500 */
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+.theme-light .to-purple-600,
+.theme-light .to-purple-500,
+.theme-light .to-blue-600,
+.theme-light .to-blue-500 {
+    --tw-gradient-to: #059669 !important; /* emerald-600 */
+}
+
+.theme-light .bg-gradient-to-r.from-blue-600\/30.to-purple-600\/30 {
+    background: rgba(16, 185, 129, 0.15) !important;
+    border-left-color: #059669 !important;
+    color: #059669 !important;
+}
+
+/* Input Fields */
+.theme-light input,
+.theme-light select {
+    color: #111827 !important;
+    background-color: #ffffff !important;
+    border-color: #d1d5db !important;
+}
+
+/* Animations */
+.theme-light .bg-blue-600\/20 {
+    background-color: rgba(16, 185, 129, 0.2) !important; 
+}
+.theme-light .bg-purple-600\/20 {
+    background-color: rgba(52, 211, 153, 0.2) !important; 
+}
+.theme-light .bg-pink-600\/20 {
+    background-color: rgba(5, 150, 105, 0.2) !important; 
+}
+
+/* Table */
+.theme-light thead {
+    background-color: #f9fafb !important;
+    border-bottom: 2px solid #e5e7eb !important;
+}
+.theme-light thead th {
+    color: #4b5563 !important;
+}
+.theme-light tbody tr:hover {
+    background-color: #f3f4f6 !important;
+}

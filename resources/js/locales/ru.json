@@ -1,0 +1,31 @@
+{
+  "nav": {
+    "dashboard": "Главная",
+    "employees": "Сотрудники",
+    "clients": "Клиенты",
+    "kitchen": "Кухня",
+    "inventory": "Склад",
+    "settings": "Настройки"
+  },
+  "auth": {
+    "logout": "Выйти",
+    "admin": "Администратор"
+  },
+  "settings": {
+    "title": "Настройки Системы",
+    "general": "Общие (UI/UX)",
+    "employees": "Сотрудники и Права",
+    "security": "Безопасность и PIN",
+    "ui_title": "Внешний вид и Языки",
+    "sys_lang": "Язык системы",
+    "theme": "Тема",
+    "theme_dark": "Тёмная (Cyber Glass)",
+    "theme_light": "Светлая",
+    "scale_title": "Размеры UI и Шрифтов",
+    "scale_small": "Мелкий (Aa)",
+    "scale_medium": "Средний (Aa)",
+    "scale_large": "Крупный (Aa)",
+    "save": "Сохранить изменения",
+    "success": "Настройки UI сохранены!"
+  }
+}
