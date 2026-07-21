@@ -12,7 +12,7 @@ import { Head } from '@inertiajs/vue3';
         </template>
 
         <div class="py-6">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Settings Card -->
                 <div class="bg-[#1e2330] rounded-2xl border border-white/5 overflow-hidden shadow-2xl p-6 sm:p-8">
                     
