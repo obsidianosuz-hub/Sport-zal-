@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
-import { Link, usePage } from '@inertiajs/vue3';
+import { Link, usePage, router } from '@inertiajs/vue3';
 import { isSystemUnlocked } from '@/store.js';
 
 const page = usePage();
@@ -70,7 +70,7 @@ const confirmRoleSwitch = () => {
         previousRole.value = roleToSwitch.value;
         showPasswordModal.value = false;
         localStorage.setItem('activeRoleFilter', roleToSwitch.value);
-        window.location.reload(); 
+        router.reload({ preserveScroll: true, preserveState: false });
     } else {
         passwordError.value = 'Parol noto\'g\'ri!';
     }

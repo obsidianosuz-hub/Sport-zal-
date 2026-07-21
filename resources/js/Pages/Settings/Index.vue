@@ -88,7 +88,7 @@ const pinForm = useForm({
 const saveUISettings = () => {
     uiForm.put(route('settings.ui'), {
         onSuccess: () => {
-            window.location.reload();
+            router.reload({ preserveScroll: true, preserveState: false });
         },
     });
 };
