@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm, usePage, Link } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
@@ -11,7 +11,7 @@ defineProps({
 });
 
 const page = usePage();
-const user = page.props.auth.user;
+const user = computed(() => page.props.auth.user);
 const { t } = useI18n();
 
 import { router } from '@inertiajs/vue3';
@@ -34,7 +34,7 @@ const showRBACModal = ref(false);
 
 const openRBACModal = (employee) => {
     // Only Admin or Manager can access
-    if (!user.roles?.includes('admin') && !user.roles?.includes('manager')) {
+    if (!user.value.roles?.includes('admin') && !user.value.roles?.includes('manager')) {
         alert("Sizda bu bo'limga kirish huquqi yo'q.");
         return;
     }
@@ -68,9 +68,9 @@ const togglePermission = (routeName) => {
 
 // Tillar va Mavzular uchun formalar
 const uiForm = useForm({
-    language: user.ui_settings?.language || 'uz',
-    theme: user.ui_settings?.theme || 'dark',
-    scale: user.ui_settings?.scale || 'medium',
+    language: user.value.ui_settings?.language || 'uz',
+    theme: user.value.ui_settings?.theme || 'dark',
+    scale: user.value.ui_settings?.scale || 'medium',
 });
 
 // Parol o'zgartirish formasi
@@ -82,7 +82,7 @@ const passwordForm = useForm({
 
 // PIN o'zgartirish formasi
 const pinForm = useForm({
-    pin_code: user.pin_code || '',
+    pin_code: user.value.pin_code || '',
 });
 
 const saveUISettings = () => {
