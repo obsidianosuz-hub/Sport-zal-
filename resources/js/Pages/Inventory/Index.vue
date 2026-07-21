@@ -113,11 +113,11 @@ const deleteItem = (id) => {
                     <div class="p-6 border-b border-white/10 flex justify-between items-center flex-wrap gap-4">
                         <div class="flex gap-6">
                             <button @click="activeTab = 'history'"
-                                :class="activeTab === 'history' ? 'text-white font-bold border-b-2 border-green-500' : 'text-gray-400 hover:text-white font-medium'"
-                                class="pb-1 transition-colors">Kirimlar Tarixi</button>
+                                :class="activeTab === 'history' ? 'text-black font-extrabold border-b-4 border-green-500' : 'text-gray-600 hover:text-black font-medium'"
+                                class="pb-1 transition-colors text-lg">Kirimlar Tarixi</button>
                             <button @click="activeTab = 'stock'"
-                                :class="activeTab === 'stock' ? 'text-white font-bold border-b-2 border-green-500' : 'text-gray-400 hover:text-white font-medium'"
-                                class="pb-1 transition-colors">Ombordagi Qoldiqlar</button>
+                                :class="activeTab === 'stock' ? 'text-black font-extrabold border-b-4 border-green-500' : 'text-gray-600 hover:text-black font-medium'"
+                                class="pb-1 transition-colors text-lg">Ombordagi Qoldiqlar</button>
                         </div>
                         
                         <button v-if="inventory.length > 0" @click="deleteAll" class="px-4 py-2 bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30 rounded-xl text-sm font-bold transition-all">

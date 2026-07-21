@@ -81,6 +81,14 @@ const checkout = () => {
         }
     });
 };
+
+const deleteProduct = (id) => {
+    if (confirm('Rostdan ham bu mahsulotni o\'chirmoqchimisiz?')) {
+        router.delete(route('inventory.destroy', id), {
+            preserveScroll: true
+        });
+    }
+};
 </script>
 
 <template>
@@ -90,6 +98,13 @@ const checkout = () => {
             <div class="flex justify-between items-center">
                 <h2 class="text-2xl font-bold text-white tracking-tight">BAR va Savdo</h2>
             </div>
+        </template>
+
+        <template #actions>
+            <Link :href="route('inventory.index')" class="hidden sm:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white text-sm font-bold rounded-xl shadow-lg shadow-emerald-500/30 transition-all border border-emerald-400/20">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                Maxsulot qo'shish
+            </Link>
         </template>
 
         <!-- Fast Access Links or Info -->
@@ -143,9 +158,12 @@ const checkout = () => {
                             <span class="text-green-400 font-bold">{{ Number(product.price).toLocaleString() }} so'm</span>
                         </div>
                         
-                        <!-- Hover indicator to show it's clickable -->
-                        <div v-if="product.stock > 0" class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <div class="bg-green-500/20 text-green-400 p-1.5 rounded-lg">
+                        <!-- Actions on hover -->
+                        <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2">
+                            <div @click.stop.prevent="deleteProduct(product.id)" class="bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white p-1.5 rounded-lg transition-colors cursor-pointer" title="O'chirish">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </div>
+                            <div v-if="product.stock > 0" class="bg-green-500/20 text-green-400 p-1.5 rounded-lg">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                             </div>
                         </div>

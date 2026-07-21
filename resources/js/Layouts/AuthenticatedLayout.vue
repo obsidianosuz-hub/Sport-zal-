@@ -1,11 +1,45 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { Link, usePage } from '@inertiajs/vue3';
 
 const page = usePage();
 const user = page.props.auth.user;
 const showingNavigationDropdown = ref(false);
 const showingNotificationsDropdown = ref(false);
+
+const isSystemUnlocked = ref(localStorage.getItem('systemUnlocked') === 'true');
+const systemPasswordInput = ref('');
+const systemPasswordError = ref('');
+
+const unlockSystem = () => {
+    const validPin = 'admin@1234';
+    if (systemPasswordInput.value === validPin) {
+        isSystemUnlocked.value = true;
+        localStorage.setItem('systemUnlocked', 'true');
+        systemPasswordError.value = '';
+    } else {
+        systemPasswordError.value = 'Noto\'g\'ri parol!';
+        systemPasswordInput.value = '';
+    }
+};
+
+const applyScale = (scale) => {
+    if (scale === 'large') {
+        document.documentElement.style.fontSize = '18px';
+    } else if (scale === 'small') {
+        document.documentElement.style.fontSize = '14px';
+    } else {
+        document.documentElement.style.fontSize = '16px';
+    }
+};
+
+onMounted(() => {
+    applyScale(user.ui_settings?.scale);
+});
+
+watch(() => user.ui_settings?.scale, (newScale) => {
+    applyScale(newScale);
+});
 
 const selectedRole = ref(localStorage.getItem('activeRoleFilter') || '');
 const previousRole = ref(selectedRole.value);
@@ -49,23 +83,65 @@ const cancelRoleSwitch = () => {
 
 const navigation = [
     { name: 'nav.dashboard', route: 'dashboard', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
-    { name: 'API', route: 'api.docs', icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4', indent: true },
+    { name: 'Click to\'lovlari', route: 'click.payments', icon: 'M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z', indent: true },
     { name: 'nav.employees', route: 'employees.index', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z' },
-    { name: 'Xodimlar Oyligi', route: 'salaries.index', icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z', indent: true },
+    { name: 'Xodimlar oyligi', route: 'salaries.index', icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z', indent: true },
     { name: 'nav.clients', route: 'clients.index', icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z' },
-    { name: 'nav.kitchen', route: 'kitchen.index', icon: 'M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-4a2 2 0 00-2-2h-4a2 2 0 00-2 2v4h8z' },
-    { name: 'Sotuvlar Tarixi', route: 'sales.index', icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01', indent: true },
-    { name: 'nav.inventory', route: 'inventory.index', icon: 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4' },
+    { name: 'BAR', route: 'kitchen.index', icon: 'M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z' },
+    { name: 'Sotuvlar tarixi', route: 'sales.index', icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2', indent: true },
+    { name: 'Ombor', route: 'inventory.index', icon: 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4' },
     { name: 'Ombor tarixi', route: 'inventory.history', icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01', indent: true },
     { name: 'nav.settings', route: 'settings.index', icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z' },
 ];
 </script>
 
 <template>
-    <div :class="[
+    <!-- GLOBAL LOCK SCREEN -->
+    <div v-if="!isSystemUnlocked" class="min-h-screen flex items-center justify-center relative overflow-hidden font-sans bg-gray-900">
+        <!-- background -->
+        <div class="absolute inset-0 z-0">
+            <img src="/images/gym-bg.jpg" alt="Background" class="w-full h-full object-cover opacity-30 mix-blend-luminosity" />
+            <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/80 via-gray-900/95 to-black/95"></div>
+            <div class="absolute top-0 right-0 w-96 h-96 bg-green-600/20 rounded-full blur-[100px] pointer-events-none animate-blob"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-emerald-600/20 rounded-full blur-[100px] pointer-events-none animate-blob animation-delay-2000"></div>
+        </div>
+        
+        <!-- lock screen form -->
+        <div class="relative z-10 bg-white/10 backdrop-blur-2xl border border-white/20 p-8 sm:p-10 rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.5)] w-full max-w-md mx-4 text-center">
+            <div class="w-20 h-20 mx-auto bg-gradient-to-br from-green-400/20 to-emerald-600/20 border border-green-500/30 rounded-2xl flex items-center justify-center mb-6 shadow-inner transform rotate-3 hover:rotate-0 transition-transform">
+                <svg class="w-10 h-10 text-green-400 drop-shadow-[0_0_10px_rgba(74,222,128,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            </div>
+            
+            <h2 class="text-3xl font-black text-white mb-2 tracking-tight">SPORT ZAL</h2>
+            <p class="text-gray-400 mb-8 text-sm">Tizimga kirish uchun parolni kiriting</p>
+            
+            <form @submit.prevent="unlockSystem">
+                <div class="relative mb-6">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path></svg>
+                    </div>
+                    <input 
+                        v-model="systemPasswordInput" 
+                        type="password" 
+                        placeholder="Parol" 
+                        class="w-full pl-12 pr-4 py-4 bg-black/40 border border-white/10 rounded-xl text-white text-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-500/50 transition-all placeholder-gray-600" 
+                        autofocus 
+                    />
+                </div>
+                <button type="submit" class="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 active:scale-[0.98] text-white font-bold rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all flex items-center justify-center gap-2">
+                    <span>Qulfni ochish</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+            </form>
+            
+            <p v-if="systemPasswordError" class="text-red-400 text-sm mt-4 font-medium animate-pulse">{{ systemPasswordError }}</p>
+        </div>
+    </div>
+
+    <div v-else :class="[
         'min-h-screen flex relative overflow-hidden font-sans transition-colors duration-500',
         user.ui_settings?.theme === 'light' ? 'theme-light bg-gray-50' : 'theme-dark bg-gray-900',
-    ]" :style="(user.ui_settings?.scale === 'large' ? 'zoom: 1.15;' : (user.ui_settings?.scale === 'small' ? 'zoom: 0.85;' : 'zoom: 1;'))">
+    ]">
         <!-- Premium Animated Background -->
         <div class="fixed inset-0 z-0 transition-opacity duration-500">
             <img src="/images/gym-bg.jpg" alt="Background" class="w-full h-full object-cover opacity-30 mix-blend-luminosity" />
@@ -81,10 +157,20 @@ const navigation = [
                 <h1 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 tracking-tighter animate-logo">SPORT ZAL</h1>
             </div>
 
+            <div class="px-4 py-3 border-b border-white/5">
+                <select @change="handleRoleChange" v-model="selectedRole" class="w-full bg-white/5 border border-white/10 text-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 outline-none cursor-pointer hover:bg-white/10 transition-colors appearance-none">
+                    <option value="" class="bg-gray-900">Barcha rollar</option>
+                    <option value="admin" class="bg-gray-900">Asosiy Admin</option>
+                    <option value="manager" class="bg-gray-900">Menejer</option>
+                    <option value="trainer" class="bg-gray-900">Treyner</option>
+                    <option value="cook" class="bg-gray-900">Oshpaz / Barmen</option>
+                </select>
+            </div>
+
             <nav class="flex-1 overflow-y-auto py-4 px-4 space-y-2">
                 <template v-for="item in navigation" :key="item.name">
                     <Link
-                        v-if="(!item.indent || (item.route === 'api.docs' && (route().current('dashboard') || route().current('api.*'))) || (item.route === 'salaries.index' && (route().current('employees.*') || route().current('salaries.*'))) || (item.route === 'sales.index' && (route().current('kitchen.*') || route().current('sales.*'))) || (item.route === 'inventory.history' && (route().current('inventory.*')))) && (user.roles?.includes('admin') || user.permissions?.includes(item.route))"
+                        v-if="(!item.indent || (item.route === 'click.payments' && (route().current('dashboard') || route().current('click.*'))) || (item.route === 'salaries.index' && (route().current('employees.*') || route().current('salaries.*'))) || (item.route === 'sales.index' && (route().current('kitchen.*') || route().current('sales.*'))) || (item.route === 'inventory.history' && (route().current('inventory.*')))) && (user.roles?.includes('admin') || user.permissions?.includes(item.route))"
                         :href="route(item.route)"
                         :class="[
                             route().current(item.route) && !item.indent
@@ -125,7 +211,7 @@ const navigation = [
                         <p class="text-xs text-blue-400 truncate uppercase tracking-widest">{{ $t('auth.admin') }}</p>
                     </div>
                 </div>
-                <Link :href="route('logout')" method="post" as="button" class="mt-2 w-full flex items-center justify-center gap-2 px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg transition-colors">
+                <Link @click="localStorage.removeItem('systemUnlocked')" :href="route('logout')" method="post" as="button" class="mt-2 w-full flex items-center justify-center gap-2 px-4 py-2 text-sm text-red-700 font-bold border-2 border-red-500 hover:text-red-800 hover:bg-red-500/10 rounded-lg transition-colors">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                     {{ $t('auth.logout') }}
                 </Link>
@@ -151,7 +237,7 @@ const navigation = [
                 </div>
 
                 <div class="flex items-center gap-3 sm:gap-4">
-                    <!-- Add Product Shortcut Removed per user request -->
+                    <slot name="actions" />
 
                     <!-- Notifications -->
                     <div class="relative">

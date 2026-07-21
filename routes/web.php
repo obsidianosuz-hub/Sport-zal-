@@ -23,9 +23,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
-    Route::get('/api-docs', function () {
-        return \Inertia\Inertia::render('ApiDocs');
-    })->name('api.docs');
+    Route::get('/click-payments', function () {
+        return \Inertia\Inertia::render('ClickPayments');
+    })->name('click.payments');
 
     // Modullar uchun yo'nalishlar
     Route::resource('/employees', \App\Http\Controllers\EmployeeController::class);
