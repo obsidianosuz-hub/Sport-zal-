@@ -137,97 +137,105 @@ const navigation = [
         </div>
     </div>
 
-    <div v-else :class="[
-        'min-h-screen flex relative overflow-hidden font-sans transition-colors duration-500',
-        user.ui_settings?.theme === 'light' ? 'theme-light bg-gray-50' : 'theme-dark bg-gray-900',
-    ]">
-        <!-- Premium Animated Background -->
-        <div class="fixed inset-0 z-0 transition-opacity duration-500">
-            <img src="/images/gym-bg.jpg" alt="Background" class="w-full h-full object-cover opacity-30 mix-blend-luminosity" />
-            <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/60 via-gray-900/90 to-black/90 theme-bg-overlay transition-colors duration-500"></div>
-            <!-- Neon Accents -->
-            <div class="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 rounded-full blur-[100px] pointer-events-none animate-blob"></div>
-            <div class="absolute bottom-0 left-0 w-96 h-96 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none animate-blob animation-delay-2000"></div>
-        </div>
+    <div v-else class="flex min-h-screen bg-[#050B14] text-slate-100 font-sans antialiased overflow-hidden selection:bg-emerald-500 selection:text-black">
+        
+        <!-- Sportga xos dinamik neon fon elementlari -->
+        <div class="absolute -top-24 -left-24 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none"></div>
 
-        <!-- Sidebar -->
-        <aside class="relative z-20 w-72 flex-shrink-0 hidden md:flex flex-col backdrop-blur-2xl bg-black/40 border-r border-white/10 h-screen transition-all duration-300">
-            <div class="h-20 flex items-center justify-center border-b border-white/10 px-6">
-                <h1 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 tracking-tighter animate-logo">SPORT ZAL</h1>
+        <!-- 1. YON PANEL (SIDEBAR) - Sport Cyber Glass -->
+        <aside class="w-72 bg-[#081120]/80 backdrop-blur-2xl border-r border-emerald-500/10 hidden md:flex flex-col z-20 transition-all duration-300 relative">
+            
+            <!-- Logo -->
+            <div class="p-6 flex items-center justify-between border-b border-emerald-500/10">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                        <svg class="w-6 h-6 text-black font-black" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+                    </div>
+                    <div>
+                        <h1 class="font-black tracking-wider text-base bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">FIT-MATRIX</h1>
+                        <span class="text-[9px] text-slate-400 font-semibold tracking-widest uppercase">GYM PRO SYSTEM</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="px-4 py-3 border-b border-white/5">
-                <select @change="handleRoleChange" v-model="selectedRole" class="w-full bg-white/5 border border-white/10 text-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 outline-none cursor-pointer hover:bg-white/10 transition-colors appearance-none">
-                    <option value="" class="bg-gray-900">Barcha rollar</option>
-                    <option value="admin" class="bg-gray-900">Asosiy Admin</option>
-                    <option value="manager" class="bg-gray-900">Menejer</option>
-                    <option value="trainer" class="bg-gray-900">Treyner</option>
-                    <option value="cook" class="bg-gray-900">Oshpaz / Barmen</option>
+            <!-- Rol Badge -->
+            <div class="p-3 mx-4 mt-4 rounded-xl bg-emerald-500/5 border border-emerald-500/20 flex flex-col gap-2 shadow-inner">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        <span class="text-xs text-slate-300 font-medium">Faol rejim:</span>
+                    </div>
+                </div>
+                <select @change="handleRoleChange" v-model="selectedRole" class="w-full bg-black/40 border border-emerald-500/30 text-emerald-400 text-xs font-bold rounded-lg focus:ring-emerald-500 focus:border-emerald-500 p-2 outline-none cursor-pointer hover:bg-black/60 transition-colors appearance-none">
+                    <option value="" class="bg-gray-900 text-white">Barcha rollar</option>
+                    <option value="admin" class="bg-gray-900 text-white">Asosiy Admin</option>
+                    <option value="manager" class="bg-gray-900 text-white">Menejer</option>
+                    <option value="trainer" class="bg-gray-900 text-white">Treyner</option>
+                    <option value="cook" class="bg-gray-900 text-white">Oshpaz / Barmen</option>
                 </select>
             </div>
 
-            <nav class="flex-1 overflow-y-auto py-4 px-4 space-y-2">
+            <!-- Menyular -->
+            <nav class="flex-1 px-4 py-5 space-y-1.5 overflow-y-auto">
                 <template v-for="item in navigation" :key="item.name">
                     <Link
                         v-if="(!item.indent || (['click.payments', 'employees.index', 'salaries.index'].includes(item.route) && (route().current('dashboard') || route().current('click.*') || route().current('employees.*') || route().current('salaries.*'))) || (item.route === 'sales.index' && (route().current('kitchen.*') || route().current('sales.*'))) || (item.route === 'inventory.history' && (route().current('inventory.*')))) && (user.roles?.includes('admin') || user.permissions?.includes(item.route))"
                         :href="route(item.route)"
                         :class="[
-                            route().current(item.route) && !item.indent
-                                ? 'bg-gradient-to-r from-emerald-600/20 to-teal-600/20 text-white border-l-4 border-emerald-500' 
-                                : (!item.indent ? 'text-gray-400 hover:bg-white/5 hover:text-white border-l-4 border-transparent' : ''),
-                            item.indent 
-                                ? (route().current(item.route) ? 'text-emerald-400 font-bold' : 'text-gray-400 hover:text-emerald-300') + ' ml-8 pl-4 text-sm py-2 relative before:content-[\'\'] before:absolute before:left-[-1px] before:top-0 before:w-3 before:h-1/2 before:border-l-2 before:border-b-2 before:border-gray-600 before:rounded-bl-md' 
-                                : 'px-4 py-3.5 text-base font-medium rounded-r-xl',
-                            'group flex items-center transition-all duration-200'
+                            route().current(item.route)
+                                ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-lg shadow-emerald-500/5'
+                                : 'text-slate-400 hover:text-white hover:bg-white/[0.04] border border-transparent',
+                            item.indent ? 'ml-6 pl-4 relative before:content-[\'\'] before:absolute before:left-[-12px] before:top-[-10px] before:w-3 before:h-[26px] before:border-l-2 before:border-b-2 before:border-emerald-500/30 before:rounded-bl-lg' : '',
+                            'flex items-center gap-3 px-4 py-3 rounded-xl transition-all'
                         ]"
                     >
                         <svg
                             :class="[
-                                route().current(item.route) ? (item.indent ? 'text-emerald-400' : 'text-emerald-400') : 'text-gray-500 group-hover:text-gray-300', 
-                                item.indent ? 'mr-3 w-5 h-5' : 'mr-4 h-6 w-6',
-                                'flex-shrink-0 transition-colors duration-200'
+                                route().current(item.route) ? 'text-emerald-400' : 'text-emerald-500', 
+                                'w-5 h-5 flex-shrink-0'
                             ]"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
-                            aria-hidden="true"
                         >
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="item.icon" />
                         </svg>
-                        {{ $t(item.name) }}
+                        <span :class="['text-sm tracking-wide', route().current(item.route) ? 'font-bold' : 'font-medium']">{{ $t(item.name) }}</span>
                     </Link>
                 </template>
             </nav>
 
-            <div class="p-4 border-t border-white/10 bg-black/20">
-                <div class="flex items-center gap-3 px-2 py-3">
-                    <div class="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-bold text-white shadow-lg">
+            <!-- Profil -->
+            <div class="p-4 border-t border-emerald-500/10 bg-[#050B14]/60">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-500 flex items-center justify-center font-bold text-black uppercase shadow-lg shadow-emerald-500/20">
                         {{ user.name.charAt(0) }}
                     </div>
                     <div class="flex-1 min-w-0">
-                        <p class="text-sm font-bold text-white truncate">{{ user.name }}</p>
-                        <p class="text-xs text-blue-400 truncate uppercase tracking-widest">{{ $t('auth.admin') }}</p>
+                        <h4 class="text-xs font-bold text-white truncate">{{ user.name }}</h4>
+                        <span class="text-[10px] text-emerald-400 tracking-wider uppercase">{{ $t('auth.admin') }}</span>
                     </div>
                 </div>
-                <Link :href="route('logout')" method="post" as="button" class="mt-2 w-full flex items-center justify-center gap-2 px-4 py-2 text-sm text-red-700 font-bold border-2 border-red-500 hover:text-red-800 hover:bg-red-500/10 rounded-lg transition-colors">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                    {{ $t('auth.logout') }}
+                <Link :href="route('logout')" method="post" as="button" class="w-full py-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 text-xs font-semibold flex items-center justify-center gap-2 transition-all">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                    Chiqish
                 </Link>
             </div>
         </aside>
 
         <!-- Main Content Area -->
-        <div class="flex-1 flex flex-col min-w-0 z-10 relative">
+        <main class="flex-1 flex flex-col z-10 overflow-hidden bg-gradient-to-br from-[#081120]/40 to-[#050B14]/80">
             <!-- Topbar (Mobile menu toggle + Title) -->
-            <header class="h-20 flex-shrink-0 flex items-center justify-between px-6 backdrop-blur-md bg-black/20 border-b border-white/10 md:bg-transparent md:backdrop-blur-none md:border-none">
+            <header class="h-20 flex-shrink-0 flex items-center justify-between px-6 backdrop-blur-md border-b border-emerald-500/10">
                 <div class="flex items-center md:hidden">
                     <button @click="showingNavigationDropdown = !showingNavigationDropdown" class="text-gray-300 hover:text-white">
                         <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
-                    <h1 class="ml-4 text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 tracking-wider animate-logo">SPORT ZAL</h1>
+                    <h1 class="ml-4 text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 tracking-wider">FIT-MATRIX</h1>
                 </div>
                 
                 <div class="hidden md:block flex-1 mr-6">
@@ -299,12 +307,12 @@ const navigation = [
             </div>
 
             <!-- Page Content -->
-            <main class="flex-1 p-6 md:p-8 overflow-y-auto">
+            <div class="flex-1 p-6 md:p-8 overflow-y-auto">
                 <div class="max-w-7xl mx-auto">
                     <slot />
                 </div>
-            </main>
-        </div>
+            </div>
+        </main>
 
         <!-- Role Switch Password Modal -->
         <div v-if="showPasswordModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
