@@ -1,13 +1,13 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { Link, usePage } from '@inertiajs/vue3';
+import { isSystemUnlocked } from '@/store.js';
 
 const page = usePage();
 const user = page.props.auth.user;
 const showingNavigationDropdown = ref(false);
 const showingNotificationsDropdown = ref(false);
 
-const isSystemUnlocked = ref(localStorage.getItem('systemUnlocked') === 'true');
 const systemPasswordInput = ref('');
 const systemPasswordError = ref('');
 
@@ -15,7 +15,6 @@ const unlockSystem = () => {
     const validPin = 'admin@1234';
     if (systemPasswordInput.value === validPin) {
         isSystemUnlocked.value = true;
-        localStorage.setItem('systemUnlocked', 'true');
         systemPasswordError.value = '';
     } else {
         systemPasswordError.value = 'Noto\'g\'ri parol!';
@@ -211,7 +210,7 @@ const navigation = [
                         <p class="text-xs text-blue-400 truncate uppercase tracking-widest">{{ $t('auth.admin') }}</p>
                     </div>
                 </div>
-                <Link @click="localStorage.removeItem('systemUnlocked')" :href="route('logout')" method="post" as="button" class="mt-2 w-full flex items-center justify-center gap-2 px-4 py-2 text-sm text-red-700 font-bold border-2 border-red-500 hover:text-red-800 hover:bg-red-500/10 rounded-lg transition-colors">
+                <Link :href="route('logout')" method="post" as="button" class="mt-2 w-full flex items-center justify-center gap-2 px-4 py-2 text-sm text-red-700 font-bold border-2 border-red-500 hover:text-red-800 hover:bg-red-500/10 rounded-lg transition-colors">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                     {{ $t('auth.logout') }}
                 </Link>
