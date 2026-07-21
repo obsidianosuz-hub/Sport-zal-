@@ -12,74 +12,79 @@ import { Head } from '@inertiajs/vue3';
         </template>
 
         <div class="py-6">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-                <!-- Content Panel -->
-                <div class="relative group">
-                    <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-sky-600/20 rounded-2xl blur-xl"></div>
-                    <div class="relative backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl overflow-hidden p-8">
-                        <div class="flex items-center gap-4 mb-6">
-                            <div class="bg-blue-600 p-3 rounded-xl inline-flex shadow-lg shadow-blue-500/30">
-                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Settings Card -->
+                <div class="bg-[#1e2330] rounded-2xl border border-white/5 overflow-hidden shadow-2xl p-6 sm:p-8">
+                    
+                    <!-- Header -->
+                    <div class="flex items-start justify-between mb-8">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center border border-blue-500/20">
+                                <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
                             </div>
                             <div>
-                                <h3 class="text-xl font-bold text-white">Click Integratsiyasi</h3>
-                                <p class="text-gray-400 text-sm">Mijozlar to'lovlarini avtomatik qabul qilish va boshqarish</p>
+                                <h3 class="text-xl font-bold text-white mb-1">Click Merchant Integratsiyasi</h3>
+                                <p class="text-gray-400 text-sm">Click to'lov shlyuzining hisob ma'lumotlarini sozlash</p>
                             </div>
                         </div>
-                        
-                        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-300">
-                            <!-- Info Card 1 -->
-                            <div class="bg-black/30 p-6 rounded-xl border border-white/5 hover:border-blue-500/30 transition-colors">
-                                <h4 class="text-blue-400 font-bold mb-3 flex items-center gap-2">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                                    Tezkor To'lovlar
-                                </h4>
-                                <p class="text-sm leading-relaxed text-gray-400">Click orqali to'lovlarni real vaqtda qabul qiling. Mijozlaringiz QR kod orqali yoki to'g'ridan-to'g'ri karta orqali sport zal to'lovlarini amalga oshirishi mumkin.</p>
-                            </div>
-
-                            <!-- Info Card 2 -->
-                            <div class="bg-black/30 p-6 rounded-xl border border-white/5 hover:border-blue-500/30 transition-colors">
-                                <h4 class="text-sky-400 font-bold mb-3 flex items-center gap-2">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    Avtomatlashtirish
-                                </h4>
-                                <p class="text-sm leading-relaxed text-gray-400">To'lov muvaffaqiyatli o'tganida mijozning abonement muddati tizim tomonidan avtomat tarzda uzaytiriladi va unga SMS/Xabarnoma yuboriladi.</p>
-                            </div>
-                        </div>
-
-                        <!-- Settings Section -->
-                        <div class="mt-8 pt-8 border-t border-white/10">
-                            <h4 class="text-lg font-bold text-white mb-4">Ulanish Sozlamalari</h4>
-                            <div class="bg-black/40 rounded-xl p-6 border border-white/5 space-y-4">
-                                <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
-                                    <div>
-                                        <p class="text-sm font-semibold text-white">Merchant ID</p>
-                                        <p class="text-xs text-gray-500">Click tizimidagi do'kon ID raqami</p>
-                                    </div>
-                                    <span class="text-blue-400 text-sm font-mono bg-blue-400/10 px-3 py-1 rounded">12456</span>
-                                </div>
-                                <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
-                                    <div>
-                                        <p class="text-sm font-semibold text-white">Secret Key</p>
-                                        <p class="text-xs text-gray-500">API so'rovlarini tasdiqlash kaliti</p>
-                                    </div>
-                                    <span class="text-gray-400 text-sm font-mono bg-white/5 px-3 py-1 rounded">••••••••••••••••</span>
-                                </div>
-                                <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
-                                    <div>
-                                        <p class="text-sm font-semibold text-white">Endpoint URL</p>
-                                        <p class="text-xs text-gray-500">Click uchun Webhook manzili</p>
-                                    </div>
-                                    <span class="text-gray-400 text-sm font-mono bg-white/5 px-3 py-1 rounded">https://sportzal.uz/api/click/webhook</span>
-                                </div>
-                            </div>
-                            <div class="mt-6 flex justify-end">
-                                <button class="px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg shadow-lg shadow-blue-500/30 transition-all">
-                                    Sozlamalarni O'zgartirish
-                                </button>
-                            </div>
+                        <div class="px-4 py-1.5 bg-blue-600 rounded-full font-bold text-white text-sm shadow-lg shadow-blue-600/30">
+                            CLICK
                         </div>
                     </div>
+
+                    <!-- Form Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <!-- Service ID -->
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wide">Click Service ID</label>
+                            <input type="text" placeholder="Masalan: 32912" class="w-full bg-[#151923] border border-transparent rounded-xl px-4 py-3.5 text-gray-300 placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all font-mono text-sm" />
+                        </div>
+                        <!-- Merchant ID -->
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wide">Click Merchant ID</label>
+                            <input type="text" placeholder="Masalan: 25983" class="w-full bg-[#151923] border border-transparent rounded-xl px-4 py-3.5 text-gray-300 placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all font-mono text-sm" />
+                        </div>
+                        <!-- Secret Key -->
+                        <div class="relative">
+                            <label class="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wide">Click Secret Key</label>
+                            <input type="password" placeholder="Secret Key" class="w-full bg-[#151923] border border-transparent rounded-xl pl-4 pr-10 py-3.5 text-gray-300 placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all font-mono text-sm" />
+                            <button class="absolute right-4 top-[38px] text-gray-500 hover:text-gray-300">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            </button>
+                        </div>
+                        <!-- API Token -->
+                        <div class="relative">
+                            <label class="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wide">Merchant API Token</label>
+                            <input type="password" placeholder="API Token" class="w-full bg-[#151923] border border-transparent rounded-xl pl-4 pr-10 py-3.5 text-gray-300 placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all font-mono text-sm" />
+                            <button class="absolute right-4 top-[38px] text-gray-500 hover:text-gray-300">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Callback URL -->
+                    <div class="mb-8">
+                        <label class="block text-xs font-bold text-gray-400 mb-2 uppercase tracking-wide">Click Merchant Kabinetiga Kiritiladigan Tayyor URL (Callback URL):</label>
+                        <div class="flex gap-3">
+                            <input type="text" readonly value="http://localhost:5173/api/payment/click" class="flex-1 bg-[#0b0e14] border border-transparent rounded-xl px-4 py-3.5 text-gray-300 font-mono text-sm focus:outline-none" />
+                            <button class="px-4 py-3.5 bg-[#151923] hover:bg-[#202634] text-gray-400 hover:text-white rounded-xl transition-colors border border-transparent hover:border-white/10 flex-shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            </button>
+                        </div>
+                        <p class="mt-3 flex items-start gap-2 text-xs text-gray-500">
+                            <svg class="w-4 h-4 flex-shrink-0 text-blue-500/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>Click tizimi tranzaksiyalar bo'yicha server bilan bog'lanishi uchun ushbu URL ishlatiladi.</span>
+                        </p>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="flex justify-end pt-6 border-t border-white/5">
+                        <button class="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl shadow-lg shadow-blue-600/20 transition-all active:scale-[0.98]">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            SAQLASH
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </div>
