@@ -48,11 +48,11 @@ const rolePasswordInput = ref('');
 const passwordError = ref('');
 
 const rolePasswords = {
-    'admin': '7000admin@',
-    'manager': '8000menejr@',
-    'trainer': '6000treyner@',
-    'cook': '9000oshpaz@',
-    '': '1111ro\'llar@'
+    'admin': '1111@',
+    'manager': '2222@',
+    'trainer': '3333@',
+    'cook': '4444@',
+    '': '5555@'
 };
 
 const handleRoleChange = (e) => {
