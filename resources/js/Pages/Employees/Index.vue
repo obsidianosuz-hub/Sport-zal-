@@ -84,7 +84,14 @@ const hasPermission = (routeName) => {
     return selectedEmployee.value.permissions.some(p => p.name === routeName);
 };
 
+const activeRole = typeof window !== 'undefined' ? (localStorage.getItem('activeRoleFilter') || '') : '';
+const canEditPermissions = activeRole === '' || activeRole === 'admin';
+
 const togglePermission = (routeName) => {
+    if (!canEditPermissions) {
+        alert("Ruxsatlarni o'zgartirish huquqi faqat Asosiy Adminga berilgan!");
+        return;
+    }
     if(selectedEmployee.value.roles?.[0]?.name === 'admin') return;
 
     let currentPermissions = selectedEmployee.value.permissions ? selectedEmployee.value.permissions.map(p => p.name) : [];
@@ -110,7 +117,7 @@ const togglePermission = (routeName) => {
         <template #header>
             <div class="flex justify-between items-center w-full">
                 <h2 class="text-2xl font-bold text-white tracking-tight">Xodimlar Boshqaruvi</h2>
-                <button @click="openAddModal" class="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 active:scale-95 active:from-emerald-500 active:to-emerald-600 active:shadow-[0_0_15px_rgba(16,185,129,0.5)] text-white font-bold rounded-xl shadow-[0_0_15px_rgba(139,92,246,0.5)] transition-all transform hover:-translate-y-0.5">
+                <button v-if="canEditPermissions" @click="openAddModal" class="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 active:scale-95 active:from-emerald-500 active:to-emerald-600 active:shadow-[0_0_15px_rgba(16,185,129,0.5)] text-white font-bold rounded-xl shadow-[0_0_15px_rgba(139,92,246,0.5)] transition-all transform hover:-translate-y-0.5">
                     + Yangi Xodim
                 </button>
             </div>
@@ -172,8 +179,8 @@ const togglePermission = (routeName) => {
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 text-right">
-                                            <button @click.stop="openEditModal(employee)" class="text-blue-400 hover:text-blue-300 mx-2 font-medium transition-colors">Tahrirlash</button>
-                                            <button @click.stop="deleteEmployee(employee.id)" class="text-red-400 hover:text-red-300 mx-2 font-medium transition-colors">O'chirish</button>
+                                            <button v-if="canEditPermissions" @click.stop="openEditModal(employee)" class="text-blue-400 hover:text-blue-300 mx-2 font-medium transition-colors">Tahrirlash</button>
+                                            <button v-if="canEditPermissions" @click.stop="deleteEmployee(employee.id)" class="text-red-400 hover:text-red-300 mx-2 font-medium transition-colors">O'chirish</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -219,9 +226,9 @@ const togglePermission = (routeName) => {
                                         <span class="text-gray-300 text-sm font-medium">{{ module.name }}</span>
                                         <button 
                                             @click="togglePermission(module.route)"
-                                            :disabled="selectedEmployee.roles?.[0]?.name === 'admin'"
+                                            :disabled="!canEditPermissions || selectedEmployee.roles?.[0]?.name === 'admin'"
                                             class="w-11 h-6 rounded-full transition-colors relative focus:outline-none"
-                                            :class="(hasPermission(module.route) || selectedEmployee.roles?.[0]?.name === 'admin') ? 'bg-green-500' : 'bg-gray-600'"
+                                            :class="(hasPermission(module.route) || selectedEmployee.roles?.[0]?.name === 'admin') ? (canEditPermissions ? 'bg-green-500' : 'bg-green-500/50 cursor-not-allowed') : (canEditPermissions ? 'bg-gray-600' : 'bg-gray-700/50 cursor-not-allowed')"
                                         >
                                             <div class="w-4 h-4 bg-white rounded-full absolute top-1 transition-transform"
                                                  :class="(hasPermission(module.route) || selectedEmployee.roles?.[0]?.name === 'admin') ? 'translate-x-6' : 'translate-x-1'"></div>
