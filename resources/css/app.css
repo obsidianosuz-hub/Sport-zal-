@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-input[type="password"]::-ms-reveal,
-input[type="password"]::-ms-clear {
-    display: none;
-}
-
 .theme-light {
     --tw-text-opacity: 1 !important;
     color: #111827 !important; /* text-gray-900 */
