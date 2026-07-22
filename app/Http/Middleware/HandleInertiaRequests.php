@@ -60,16 +60,31 @@ class HandleInertiaRequests extends Middleware
         }
 
         $userData = null;
+        $rolePermissions = [];
+        
         if ($request->user()) {
             $userData = $request->user()->toArray();
             $userData['roles'] = $request->user()->getRoleNames();
             $userData['permissions'] = $request->user()->getAllPermissions()->pluck('name');
+            
+            // Barcha rollar bo'yicha permissionlarni olish (kiosk/role switcher uchun)
+            $users = \App\Models\User::with('roles', 'permissions')->get();
+            foreach ($users as $u) {
+                if ($u->roles->count() > 0) {
+                    $roleName = $u->roles->first()->name;
+                    // Faqat birinchi uchragan userning permissionlarini olamiz (har bir rol uchun bitta namunaviy user)
+                    if (!isset($rolePermissions[$roleName])) {
+                        $rolePermissions[$roleName] = $u->getAllPermissions()->pluck('name');
+                    }
+                }
+            }
         }
 
         return [
             ...parent::share($request),
             'auth' => [
                 'user' => $userData,
+                'rolePermissions' => $rolePermissions,
             ],
             'notifications' => $notifications,
         ];
