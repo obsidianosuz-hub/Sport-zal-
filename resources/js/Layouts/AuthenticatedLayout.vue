@@ -99,7 +99,7 @@ const hasAccess = (item) => {
 
     // Admin yoki "Barcha rollar" tanlanganda
     if (!activeRole || activeRole === 'admin') {
-        return user.value.roles?.includes('admin') || user.value.permissions?.includes(item.route);
+        return user.roles?.includes('admin') || user.permissions?.includes(item.route);
     }
 
     // Tanlangan rolning ruxsatlarini tekshirish
