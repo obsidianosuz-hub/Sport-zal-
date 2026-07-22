@@ -57,7 +57,7 @@ const rolePasswords = {
 
 const handleRoleChange = (e) => {
     roleToSwitch.value = e.target.value;
-    e.target.value = previousRole.value;
+    e.target.value = selectedRole.value;
     
     rolePasswordInput.value = '';
     passwordError.value = '';
@@ -174,7 +174,7 @@ const hasAccess = (item) => {
             </div>
 
             <div class="px-4 py-3 border-b border-white/5">
-                <select @change="handleRoleChange" v-model="selectedRole" class="w-full bg-white/5 border border-white/10 text-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 outline-none cursor-pointer hover:bg-white/10 transition-colors appearance-none">
+                <select @change="handleRoleChange" :value="selectedRole" class="w-full bg-white/5 border border-white/10 text-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 outline-none cursor-pointer hover:bg-white/10 transition-colors appearance-none">
                     <option value="" class="bg-gray-900">Barcha rollar</option>
                     <option value="admin" class="bg-gray-900">Asosiy Admin</option>
                     <option value="manager" class="bg-gray-900">Menejer</option>
