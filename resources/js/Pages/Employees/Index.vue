@@ -125,7 +125,7 @@ const togglePermission = (routeName) => {
 
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mt-6">
             <!-- Left Side: Employee List -->
-            <div class="lg:col-span-3 space-y-6">
+            <div :class="canEditPermissions ? 'lg:col-span-3' : 'lg:col-span-4'" class="space-y-6">
                 <!-- Glass Panel for Table -->
                 <div class="relative group">
                     <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl blur-xl"></div>
@@ -196,7 +196,7 @@ const togglePermission = (routeName) => {
             </div>
 
             <!-- Right Side: Permissions Panel -->
-            <div class="lg:col-span-1">
+            <div v-if="canEditPermissions" class="lg:col-span-1">
                 <div class="sticky top-6">
                     <div class="relative group">
                         <div class="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-2xl blur-xl transition-all duration-300"></div>
