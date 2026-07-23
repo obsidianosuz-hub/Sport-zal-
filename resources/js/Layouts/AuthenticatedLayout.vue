@@ -1,10 +1,10 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
 import { Link, usePage, router } from '@inertiajs/vue3';
 import { isSystemUnlocked } from '@/store.js';
 
 const page = usePage();
-const user = page.props.auth.user;
+const user = computed(() => page.props.auth.user);
 const showingNavigationDropdown = ref(false);
 const showingNotificationsDropdown = ref(false);
 
@@ -33,10 +33,10 @@ const applyScale = (scale) => {
 };
 
 onMounted(() => {
-    applyScale(user.ui_settings?.scale);
+    applyScale(user.value.ui_settings?.scale);
 });
 
-watch(() => user.ui_settings?.scale, (newScale) => {
+watch(() => user.value.ui_settings?.scale, (newScale) => {
     applyScale(newScale);
 });
 
@@ -99,7 +99,7 @@ const hasAccess = (item) => {
 
     // Admin yoki "Barcha rollar" tanlanganda
     if (!activeRole || activeRole === 'admin') {
-        return user.roles?.includes('admin') || user.permissions?.includes(item.route);
+        return user.value.roles?.includes('admin') || user.value.permissions?.includes(item.route);
     }
 
     // Tanlangan rolning ruxsatlarini tekshirish
