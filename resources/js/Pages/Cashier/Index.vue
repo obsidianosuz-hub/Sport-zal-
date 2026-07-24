@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 import { isSystemUnlocked } from '@/store.js';
 
 const props = defineProps({
@@ -13,8 +13,18 @@ const isLight = computed(() => {
     return true; 
 });
 
-const paymentAmount = ref('');
-const selectedClient = ref(null);
+const form = useForm({
+    client_id: '',
+    amount: ''
+});
+
+const submitPayment = () => {
+    form.post(route('cashier.store'), {
+        onSuccess: () => {
+            form.reset();
+        }
+    });
+};
 
 const formatDate = (dateStr) => {
     if (!dateStr) return '-';
@@ -39,29 +49,31 @@ const formatDate = (dateStr) => {
                 
                 <!-- Payment Input Form (Black Box Area in screenshot) -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
-                    <div class="flex flex-col md:flex-row gap-4 items-end">
+                    <form @submit.prevent="submitPayment" class="flex flex-col md:flex-row gap-4 items-end">
                         <div class="flex-1">
                             <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Mijozni tanlang</label>
-                            <select v-model="selectedClient" class="w-full rounded-lg border-gray-200 focus:ring-blue-500 focus:border-blue-500">
-                                <option :value="null" disabled hidden>Mijozni tanlang...</option>
+                            <select v-model="form.client_id" required class="w-full rounded-lg border-gray-200 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="" disabled hidden>Mijozni tanlang...</option>
                                 <option v-for="client in clients" :key="client.id" :value="client.id">
                                     {{ client.name }}
                                 </option>
                             </select>
+                            <div v-if="form.errors.client_id" class="text-red-500 text-xs mt-1">{{ form.errors.client_id }}</div>
                         </div>
                         <div class="flex-1">
                             <label class="block text-xs font-bold text-gray-500 uppercase mb-2">To'lov summasi</label>
                             <div class="relative">
-                                <input v-model="paymentAmount" type="number" placeholder="Masalan: 50000" class="w-full rounded-lg border-gray-200 focus:ring-blue-500 focus:border-blue-500 pr-12" />
+                                <input v-model="form.amount" type="number" required min="0" placeholder="Masalan: 50000" class="w-full rounded-lg border-gray-200 focus:ring-blue-500 focus:border-blue-500 pr-12" />
                                 <span class="absolute right-4 top-2.5 text-gray-400 text-sm">so'm</span>
                             </div>
+                            <div v-if="form.errors.amount" class="text-red-500 text-xs mt-1">{{ form.errors.amount }}</div>
                         </div>
                         <div>
-                            <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-lg transition-colors shadow-lg shadow-blue-500/30 whitespace-nowrap">
+                            <button type="submit" :disabled="form.processing" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-lg transition-colors shadow-lg shadow-blue-500/30 whitespace-nowrap disabled:opacity-50">
                                 To'lovni tasdiqlash
                             </button>
                         </div>
-                    </div>
+                    </form>
                 </div>
 
                 <div class="flex flex-col lg:flex-row gap-6">
