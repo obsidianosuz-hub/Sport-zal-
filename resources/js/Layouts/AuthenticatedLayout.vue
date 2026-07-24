@@ -52,6 +52,7 @@ const rolePasswords = {
     'manager': '2222@',
     'trainer': '3333@',
     'cook': '4444@',
+    'cashier': '6666@',
     '': '5555@'
 };
 
@@ -193,6 +194,7 @@ const cancelRoleSwitch = () => {
                     <option value="manager" class="bg-gray-900">Menejer</option>
                     <option value="trainer" class="bg-gray-900">Treyner</option>
                     <option value="cook" class="bg-gray-900">Oshpaz / Barmen</option>
+                    <option value="cashier" class="bg-gray-900">Kassir</option>
                 </select>
             </div>
 

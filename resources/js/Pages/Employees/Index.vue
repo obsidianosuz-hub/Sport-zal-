@@ -282,6 +282,7 @@ const togglePermission = (routeName) => {
                                 <option value="manager">Menejer</option>
                                 <option value="admin">Admin</option>
                                 <option value="cook">Oshpaz</option>
+                                <option value="cashier">Kassir</option>
                             </select>
                             <p v-if="form.errors.role" class="text-red-400 text-xs mt-1">{{ form.errors.role }}</p>
                         </div>
