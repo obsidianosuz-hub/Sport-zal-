@@ -146,4 +146,12 @@ class InventoryController extends Controller
         
         return redirect()->back();
     }
+
+    public function destroyHistory(string $id)
+    {
+        $history = \App\Models\InventoryHistory::findOrFail($id);
+        $history->delete();
+        
+        return redirect()->back();
+    }
 }

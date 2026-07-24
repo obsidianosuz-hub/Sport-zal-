@@ -18,6 +18,9 @@ import { router } from '@inertiajs/vue3';
 
 const activeTab = ref('general'); // 'general', 'employees', 'security'
 
+const activeRole = typeof window !== 'undefined' ? (localStorage.getItem('activeRoleFilter') || '') : '';
+const canEditPermissions = activeRole === '' || activeRole === 'admin';
+
 const availableModules = [
     { name: 'Umumiy Statistika', route: 'dashboard' },
     { name: 'Xodimlar Boshqaruvi', route: 'employees.index' },
@@ -33,8 +36,8 @@ const selectedEmployeeForRBAC = ref(null);
 const showRBACModal = ref(false);
 
 const openRBACModal = (employee) => {
-    // Only Admin or Manager can access
-    if (!user.roles?.includes('admin') && !user.roles?.includes('manager')) {
+    // Only Admin can access permissions editing
+    if (!canEditPermissions) {
         alert("Sizda bu bo'limga kirish huquqi yo'q.");
         return;
     }
@@ -48,6 +51,7 @@ const hasPermission = (routeName) => {
 };
 
 const togglePermission = (routeName) => {
+    if (!canEditPermissions) return;
     if(selectedEmployeeForRBAC.value.roles?.[0]?.name === 'admin') return;
 
     let currentPermissions = selectedEmployeeForRBAC.value.permissions ? selectedEmployeeForRBAC.value.permissions.map(p => p.name) : [];
@@ -135,6 +139,7 @@ const updatePin = () => {
                     </button>
                     
                     <button 
+                        v-if="canEditPermissions"
                         @click="activeTab = 'employees'" 
                         :class="activeTab === 'employees' ? 'bg-gradient-to-r from-blue-600/30 to-purple-600/30 text-white border-l-4 border-blue-500' : 'text-gray-400 hover:bg-white/5 hover:text-white border-l-4 border-transparent'"
                         class="w-full text-left px-4 py-3 rounded-r-xl font-medium transition-all"
