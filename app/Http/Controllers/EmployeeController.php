@@ -32,7 +32,6 @@ class EmployeeController extends Controller
     {
         $request->validate([
             'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email',
             'phone'    => 'nullable|string|max:20',
             'password' => 'required|string',
             'role'     => 'required|in:admin,manager,trainer,cook,cashier',
@@ -41,7 +40,6 @@ class EmployeeController extends Controller
 
         $user = \App\Models\User::create([
             'name'     => $request->name,
-            'email'    => $request->email,
             'phone'    => $request->phone,
             'password' => bcrypt($request->password),
             'pin_code' => $request->pin_code,
@@ -77,7 +75,6 @@ class EmployeeController extends Controller
 
         $request->validate([
             'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email,' . $user->id,
             'phone'    => 'nullable|string|max:20',
             'password' => 'nullable|string',
             'role'     => 'required|in:admin,manager,trainer,cook,cashier',
@@ -85,7 +82,6 @@ class EmployeeController extends Controller
         ]);
 
         $user->name = $request->name;
-        $user->email = $request->email;
         $user->phone = $request->phone;
         $user->pin_code = $request->pin_code;
 

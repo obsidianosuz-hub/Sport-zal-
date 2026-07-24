@@ -12,7 +12,6 @@ const editingEmployee = ref(null);
 
 const form = useForm({
     name: '',
-    email: '',
     phone: '',
     password: '',
     role: 'trainer',
@@ -29,7 +28,6 @@ const openAddModal = () => {
 const openEditModal = (employee) => {
     editingEmployee.value = employee;
     form.name = employee.name;
-    form.email = employee.email;
     form.phone = employee.phone || '';
     form.password = '';
     form.role = employee.roles?.[0]?.name || 'trainer';
@@ -261,12 +259,6 @@ const togglePermission = (routeName) => {
                         <p v-if="form.errors.name" class="text-red-400 text-xs mt-1">{{ form.errors.name }}</p>
                     </div>
 
-                    <!-- Email -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-1">Email *</label>
-                        <input v-model="form.email" type="email" class="w-full bg-black/40 border border-white/10 rounded-xl text-white px-4 py-2.5 focus:ring-2 focus:ring-blue-500/50 outline-none" required>
-                        <p v-if="form.errors.email" class="text-red-400 text-xs mt-1">{{ form.errors.email }}</p>
-                    </div>
 
                     <!-- Telefon & Rol -->
                     <div class="grid grid-cols-2 gap-4">
