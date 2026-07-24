@@ -43,7 +43,7 @@ const formatDate = (dateStr) => {
                         <div class="flex-1">
                             <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Mijozni tanlang</label>
                             <select v-model="selectedClient" class="w-full rounded-lg border-gray-200 focus:ring-blue-500 focus:border-blue-500">
-                                <option :value="null">Mijozni tanlang...</option>
+                                <option :value="null" disabled hidden>Mijozni tanlang...</option>
                                 <option v-for="client in clients" :key="client.id" :value="client.id">
                                     {{ client.name }}
                                 </option>
