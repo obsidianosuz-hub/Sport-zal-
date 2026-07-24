@@ -26,6 +26,7 @@ const availableModules = [
     { name: 'Xodimlar Boshqaruvi', route: 'employees.index' },
     { name: 'Xodimlar Oyligi', route: 'salaries.index' },
     { name: 'Mijozlar Bazasi', route: 'clients.index' },
+    { name: 'Kassa', route: 'cashier.index' },
     { name: 'Fitnes Bar', route: 'kitchen.index' },
     { name: 'Sotuvlar Tarixi', route: 'sales.index' },
     { name: 'Omborxona', route: 'inventory.index' },
