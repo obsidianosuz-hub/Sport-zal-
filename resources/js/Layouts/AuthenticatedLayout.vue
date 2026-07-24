@@ -201,7 +201,7 @@ const cancelRoleSwitch = () => {
             <nav class="flex-1 overflow-y-auto py-4 px-4 space-y-2">
                 <template v-for="item in navigation" :key="item.name">
                     <Link
-                        v-if="(!item.indent || (['click.payments', 'employees.index', 'salaries.index'].includes(item.route) && (route().current('dashboard') || route().current('click.*') || route().current('employees.*') || route().current('salaries.*'))) || (item.route === 'sales.index' && (route().current('kitchen.*') || route().current('sales.*'))) || (item.route === 'inventory.history' && (route().current('inventory.*')))) && hasAccess(item)"
+                        v-if="(!item.indent || (['click.payments', 'employees.index', 'salaries.index'].includes(item.route) && (route().current('dashboard') || route().current('click.*') || route().current('employees.*') || route().current('salaries.*'))) || (item.route === 'sales.index' && (route().current('kitchen.*') || route().current('sales.*'))) || (item.route === 'inventory.history' && (route().current('inventory.*'))) || (item.route === 'cashier.history' && (route().current('cashier.*')))) && hasAccess(item)"
                         :href="route(item.route)"
                         :class="[
                             route().current(item.route) && !item.indent
@@ -322,7 +322,7 @@ const cancelRoleSwitch = () => {
                 <div class="absolute top-0 left-0 w-64 h-full bg-gray-900 border-r border-gray-800 p-4">
                     <nav class="space-y-2 mt-8">
                         <template v-for="item in navigation" :key="item.name">
-                            <Link v-if="hasAccess(item)" :href="route(item.route)" class="block px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg">
+                            <Link v-if="(!item.indent || (['click.payments', 'employees.index', 'salaries.index'].includes(item.route) && (route().current('dashboard') || route().current('click.*') || route().current('employees.*') || route().current('salaries.*'))) || (item.route === 'sales.index' && (route().current('kitchen.*') || route().current('sales.*'))) || (item.route === 'inventory.history' && (route().current('inventory.*'))) || (item.route === 'cashier.history' && (route().current('cashier.*')))) && hasAccess(item)" :href="route(item.route)" :class="['block py-3 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg', item.indent ? 'px-8 text-sm' : 'px-4']">
                                 {{ $t(item.name) }}
                             </Link>
                         </template>
