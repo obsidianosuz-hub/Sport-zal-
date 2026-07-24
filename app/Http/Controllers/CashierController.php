@@ -9,6 +9,9 @@ class CashierController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Cashier/Index');
+        $clients = \App\Models\Client::latest()->get();
+        return Inertia::render('Cashier/Index', [
+            'clients' => $clients
+        ]);
     }
 }
