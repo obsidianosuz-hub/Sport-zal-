@@ -6,6 +6,7 @@ import { isSystemUnlocked } from '@/store.js';
 
 const props = defineProps({
     clients: Array,
+    recent_histories: Array,
 });
 
 const isLight = computed(() => {
@@ -131,6 +132,32 @@ const formatDate = (dateStr) => {
                                         <div class="font-bold text-gray-900 text-sm">{{ client.name }}</div>
                                         <div class="text-xs text-gray-500">{{ client.subscription_type === 'vip' ? 'VIP' : 'Oddiy' }}</div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Oxirgi tashriflar / Bugungi tarix (Red Area in screenshot) -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-bold text-gray-800">Oxirgi tashriflar</h3>
+                                <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-full">{{ recent_histories?.length || 0 }} ta bugun</span>
+                            </div>
+                            
+                            <div class="space-y-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                                <div v-for="history in recent_histories" :key="history.id" class="flex items-center gap-3 p-3 rounded-lg border border-gray-100 hover:border-emerald-200 hover:bg-emerald-50/50 transition-all">
+                                    <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm">
+                                        {{ history.client?.name.charAt(0).toUpperCase() }}
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="font-bold text-gray-900 text-sm truncate">{{ history.client?.name }}</div>
+                                        <div class="text-xs text-gray-500 flex items-center gap-1 mt-0.5">
+                                            <svg class="w-3 h-3 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            <span class="text-red-500 font-medium">{{ new Date(history.arrived_at).toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit' }) }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-if="!recent_histories || recent_histories.length === 0" class="text-center py-4 text-sm text-gray-500">
+                                    Bugun hali hech kim kelmadi.
                                 </div>
                             </div>
                         </div>

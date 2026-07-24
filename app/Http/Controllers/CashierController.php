@@ -10,8 +10,14 @@ class CashierController extends Controller
     public function index()
     {
         $clients = \App\Models\Client::latest()->get();
+        $recent_histories = \App\Models\CashierHistory::with('client')
+            ->whereDate('arrived_at', today())
+            ->latest()
+            ->get();
+            
         return Inertia::render('Cashier/Index', [
-            'clients' => $clients
+            'clients' => $clients,
+            'recent_histories' => $recent_histories
         ]);
     }
 
