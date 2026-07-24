@@ -8,11 +8,9 @@ const props = defineProps({
 });
 
 const deleteHistory = (id) => {
-    if (confirm("Ushbu tarixni o'chirishni xohlaysizmi?")) {
-        router.delete(route('inventory.history.destroy', id), {
-            preserveScroll: true
-        });
-    }
+    router.delete(route('inventory.history.destroy', id), {
+        preserveScroll: true
+    });
 };
 
 const formatDate = (dateStr) => {
