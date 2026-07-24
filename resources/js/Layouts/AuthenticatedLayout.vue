@@ -64,22 +64,6 @@ const handleRoleChange = (e) => {
     showPasswordModal.value = true;
 };
 
-const confirmRoleSwitch = () => {
-    if (rolePasswordInput.value === rolePasswords[roleToSwitch.value]) {
-        selectedRole.value = roleToSwitch.value;
-        previousRole.value = roleToSwitch.value;
-        showPasswordModal.value = false;
-        localStorage.setItem('activeRoleFilter', roleToSwitch.value);
-        router.reload({ preserveScroll: true, preserveState: false });
-    } else {
-        passwordError.value = 'Parol noto\'g\'ri!';
-    }
-};
-
-const cancelRoleSwitch = () => {
-    showPasswordModal.value = false;
-};
-
 const navigation = [
     { name: 'nav.dashboard', route: 'dashboard', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
     { name: 'Click to\'lovlari', route: 'click.payments', icon: 'M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z', indent: true },
@@ -97,17 +81,44 @@ const hasAccess = (item) => {
     const activeRole = selectedRole.value;
     const userRolePermissions = page.props.auth.rolePermissions || {};
 
-    // Admin yoki "Barcha rollar" tanlanganda
     if (!activeRole || activeRole === 'admin') {
         return user.value.roles?.includes('admin') || user.value.permissions?.includes(item.route);
     }
 
-    // Tanlangan rolning ruxsatlarini tekshirish
     if (userRolePermissions[activeRole]) {
         return userRolePermissions[activeRole].includes(item.route);
     }
     
     return false;
+};
+
+const confirmRoleSwitch = () => {
+    if (rolePasswordInput.value === rolePasswords[roleToSwitch.value]) {
+        selectedRole.value = roleToSwitch.value;
+        previousRole.value = roleToSwitch.value;
+        showPasswordModal.value = false;
+        localStorage.setItem('activeRoleFilter', roleToSwitch.value);
+        
+        const currentRouteName = route().current();
+        const currentNavItem = navigation.find(item => item.route === currentRouteName);
+        
+        if (currentNavItem && hasAccess(currentNavItem)) {
+            router.reload({ preserveScroll: true, preserveState: false });
+        } else {
+            const firstAccessible = navigation.find(item => hasAccess(item));
+            if (firstAccessible) {
+                router.visit(route(firstAccessible.route));
+            } else {
+                router.visit(route('dashboard'));
+            }
+        }
+    } else {
+        passwordError.value = 'Parol noto\'g\'ri!';
+    }
+};
+
+const cancelRoleSwitch = () => {
+    showPasswordModal.value = false;
 };
 </script>
 
