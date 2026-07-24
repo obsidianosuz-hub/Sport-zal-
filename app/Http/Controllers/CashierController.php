@@ -14,4 +14,9 @@ class CashierController extends Controller
             'clients' => $clients
         ]);
     }
+
+    public function history()
+    {
+        return Inertia::render('Cashier/History');
+    }
 }

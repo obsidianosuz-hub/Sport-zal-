@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/sales/{sale}', [\App\Http\Controllers\SaleController::class, 'destroy'])->name('sales.destroy');
     Route::resource('/clients', \App\Http\Controllers\ClientController::class);
     Route::get('/cashier', [\App\Http\Controllers\CashierController::class, 'index'])->name('cashier.index');
+    Route::get('/cashier/history', [\App\Http\Controllers\CashierController::class, 'history'])->name('cashier.history');
     Route::resource('/kitchen', \App\Http\Controllers\KitchenController::class);
     Route::post('/inventory/replenish', [\App\Http\Controllers\InventoryController::class, 'replenish'])->name('inventory.replenish');
     Route::delete('/inventory/all', [\App\Http\Controllers\InventoryController::class, 'destroyAll'])->name('inventory.destroyAll');
