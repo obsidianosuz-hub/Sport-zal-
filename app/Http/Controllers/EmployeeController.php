@@ -34,7 +34,7 @@ class EmployeeController extends Controller
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|unique:users,email',
             'phone'    => 'nullable|string|max:20',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string',
             'role'     => 'required|in:admin,manager,trainer,cook,cashier',
             'pin_code' => 'nullable|digits:4',
         ]);
@@ -79,7 +79,7 @@ class EmployeeController extends Controller
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|unique:users,email,' . $user->id,
             'phone'    => 'nullable|string|max:20',
-            'password' => 'nullable|string|min:6',
+            'password' => 'nullable|string',
             'role'     => 'required|in:admin,manager,trainer,cook,cashier',
             'pin_code' => 'nullable|digits:4',
         ]);
