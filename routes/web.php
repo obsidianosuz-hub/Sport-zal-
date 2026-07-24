@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cashier', [\App\Http\Controllers\CashierController::class, 'index'])->name('cashier.index');
     Route::post('/cashier', [\App\Http\Controllers\CashierController::class, 'store'])->name('cashier.store');
     Route::get('/cashier/history', [\App\Http\Controllers\CashierController::class, 'history'])->name('cashier.history');
+    Route::put('/cashier/history/{id}/leave', [\App\Http\Controllers\CashierController::class, 'markAsLeft'])->name('cashier.history.leave');
     Route::delete('/cashier/history/all', [\App\Http\Controllers\CashierController::class, 'destroyAll'])->name('cashier.history.destroyAll');
     Route::resource('/kitchen', \App\Http\Controllers\KitchenController::class);
     Route::post('/inventory/replenish', [\App\Http\Controllers\InventoryController::class, 'replenish'])->name('inventory.replenish');

@@ -46,6 +46,15 @@ class CashierController extends Controller
         return redirect()->route('cashier.history')->with('success', 'To\'lov muvaffaqiyatli saqlandi');
     }
 
+    public function markAsLeft($id)
+    {
+        $history = \App\Models\CashierHistory::findOrFail($id);
+        $history->update([
+            'left_at' => now(),
+        ]);
+        return back()->with('success', 'Mijozning ketish vaqti belgilandi');
+    }
+
     public function destroyAll()
     {
         \App\Models\CashierHistory::truncate();

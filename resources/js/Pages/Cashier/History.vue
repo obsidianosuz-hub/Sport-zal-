@@ -13,6 +13,10 @@ const clearHistory = () => {
     }
 };
 
+const markAsLeft = (id) => {
+    router.put(route('cashier.history.leave', id));
+};
+
 const formatDate = (dateStr) => {
     if (!dateStr) return '-';
     const d = new Date(dateStr);
@@ -60,7 +64,12 @@ const formatDate = (dateStr) => {
                                         <div class="text-red-500 font-medium">{{ formatDate(history.arrived_at) }}</div>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <div class="text-gray-500">{{ formatDate(history.left_at) }}</div>
+                                        <div v-if="history.left_at" class="text-gray-500 font-medium">
+                                            {{ formatDate(history.left_at) }}
+                                        </div>
+                                        <button v-else @click="markAsLeft(history.id)" class="text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded border border-red-200 transition-colors">
+                                            Chiqib ketish
+                                        </button>
                                     </td>
                                     <td class="px-6 py-4 text-right">
                                         <div class="font-bold text-amber-500">{{ history.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") }} so'm</div>
