@@ -49,6 +49,7 @@ class InventoryController extends Controller
         $product = \App\Models\Product::create([
             'name' => $request->name,
             'category' => $request->category,
+            'buy_price' => $request->buy_price,
             'price' => $request->price,
             'stock' => $request->stock,
         ]);
