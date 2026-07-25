@@ -138,7 +138,7 @@ const deleteClient = (id) => {
 
                     <div class="mt-6 flex justify-end gap-3 pt-4 border-t border-white/10">
                         <button type="button" @click="showModal = false" class="px-4 py-2 text-gray-400 hover:text-white transition-colors">Bekor qilish</button>
-                        <button type="submit" :disabled="form.processing" class="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl hover:from-blue-500 hover:to-purple-500 active:scale-95 active:from-emerald-500 active:to-emerald-600 active:shadow-[0_0_15px_rgba(16,185,129,0.5)] disabled:opacity-50">
+                        <button type="submit" :disabled="form.processing || !form.name || !form.phone || !form.subscription_expires_at" class="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl hover:from-blue-500 hover:to-purple-500 active:scale-95 active:from-emerald-500 active:to-emerald-600 active:shadow-[0_0_15px_rgba(16,185,129,0.5)] disabled:opacity-50 disabled:cursor-not-allowed">
                             Saqlash
                         </button>
                     </div>
