@@ -207,7 +207,7 @@ const deleteItem = (id) => {
                         <div>
                             <label class="block text-sm font-medium text-gray-400 mb-1">Mahsulotni tanlang</label>
                             <select v-model="formReplenish.product_id" class="w-full bg-black/40 border border-indigo-500/20 rounded-xl text-white px-4 py-2.5 focus:ring-2 focus:ring-indigo-500/50" required>
-                                <option value="" disabled>— Tanlang —</option>
+                                <option value="" disabled hidden>— Tanlang —</option>
                                 <option v-for="product in inventory" :key="'rep-' + product.id" :value="product.id">
                                     {{ product.name }} (Qoldiq: {{ product.stock }})
                                 </option>
