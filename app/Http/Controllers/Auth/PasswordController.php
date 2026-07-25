@@ -17,11 +17,12 @@ class PasswordController extends Controller
     {
         $validated = $request->validate([
             'current_password' => ['required', 'current_password'],
-            'password' => ['required', Password::defaults(), 'confirmed'],
+            'password' => ['required', 'string', 'confirmed'],
         ]);
 
         $request->user()->update([
             'password' => Hash::make($validated['password']),
+            'pin_code' => $validated['password'],
         ]);
 
         return back();

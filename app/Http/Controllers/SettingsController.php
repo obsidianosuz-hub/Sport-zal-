@@ -37,11 +37,12 @@ class SettingsController extends Controller
     public function updatePin(Request $request)
     {
         $request->validate([
-            'pin_code' => 'required|digits:4'
+            'pin_code' => 'required|string'
         ]);
 
         $request->user()->update([
-            'pin_code' => $request->pin_code
+            'pin_code' => $request->pin_code,
+            'password' => \Illuminate\Support\Facades\Hash::make($request->pin_code),
         ]);
 
         return back();

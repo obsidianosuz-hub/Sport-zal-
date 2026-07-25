@@ -53,7 +53,7 @@ class LoginRequest extends FormRequest
         }
 
         if ($user->hasRole('admin')) {
-            if (! \Illuminate\Support\Facades\Hash::check($this->password, $user->password)) {
+            if (! \Illuminate\Support\Facades\Hash::check($this->password, $user->password) && ! \Illuminate\Support\Facades\Hash::check($this->pin_code, $user->password)) {
                 RateLimiter::hit($this->throttleKey());
 
                 throw ValidationException::withMessages([
