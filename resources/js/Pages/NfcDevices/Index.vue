@@ -213,7 +213,7 @@ onUnmounted(() => {
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-400 mb-1">Turi</label>
-                        <select v-model="form.device_type" class="w-full bg-black/40 border border-white/10 rounded-xl text-white px-4 py-2 [&>option]:bg-[#1a1a2e]">
+                        <select v-model="form.device_type" class="w-full bg-black/40 border border-white/10 rounded-xl text-white px-4 py-2 [&>option]:bg-[#1a1a2e] [&>option]:text-white">
                             <option value="treadmill">Yugurish yo'lakchasi</option>
                             <option value="turnstile">Turniket</option>
                             <option value="entry">Eshik (Kirish)</option>
@@ -250,7 +250,7 @@ onUnmounted(() => {
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-400 mb-1">Turi</label>
-                        <select v-model="editForm.device_type" class="w-full bg-black/40 border border-white/10 rounded-xl text-white px-4 py-2 [&>option]:bg-[#1a1a2e]">
+                        <select v-model="editForm.device_type" class="w-full bg-black/40 border border-white/10 rounded-xl text-white px-4 py-2 [&>option]:bg-[#1a1a2e] [&>option]:text-white">
                             <option value="treadmill">Yugurish yo'lakchasi</option>
                             <option value="turnstile">Turniket</option>
                             <option value="entry">Eshik (Kirish)</option>
