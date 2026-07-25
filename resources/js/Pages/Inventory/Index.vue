@@ -57,9 +57,11 @@ const formReplenish = useForm({
 
 watch(() => [formReplenish.product_id, formReplenish.quantity], ([newProductId, newQuantity]) => {
     if (newProductId && newQuantity) {
-        const product = props.inventory.find(p => p.id === newProductId);
-        if (product) {
-            formReplenish.total_cost = product.buy_price * newQuantity;
+        const product = props.inventory.find(p => p.id == newProductId);
+        if (product && product.buy_price) {
+            formReplenish.total_cost = Number(product.buy_price) * Number(newQuantity);
+        } else {
+            formReplenish.total_cost = 0;
         }
     } else {
         formReplenish.total_cost = '';
