@@ -278,7 +278,7 @@ const updatePin = () => {
                                     <input v-model="passwordForm.password_confirmation" type="password" class="w-full bg-black/40 border border-white/10 rounded-xl text-white px-4 py-2 focus:ring-2 focus:ring-red-500/50">
                                     <p v-if="passwordForm.errors.password_confirmation" class="text-red-400 text-xs mt-1">{{ passwordForm.errors.password_confirmation }}</p>
                                 </div>
-                                <button type="submit" :disabled="passwordForm.processing" class="px-6 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl transition-all w-full border border-white/10 disabled:opacity-50">
+                                <button type="submit" :disabled="passwordForm.processing" class="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-bold rounded-xl transition-all w-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 disabled:opacity-50 disabled:transform-none">
                                     Parolni O'zgartirish
                                 </button>
                             </form>
