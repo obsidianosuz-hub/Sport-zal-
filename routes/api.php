@@ -18,3 +18,9 @@ Route::middleware('auth:sanctum')->group(function () {
     // Attendance API
     Route::post('/attendance/check-in', [AttendanceController::class, 'checkIn']);
 });
+
+// Hardware IoT NFC routes
+Route::prefix('v1/nfc')->group(function () {
+    Route::post('/scan', [\App\Http\Controllers\Api\NfcController::class, 'scan']);
+    Route::post('/ping', [\App\Http\Controllers\Api\NfcController::class, 'ping']);
+});
