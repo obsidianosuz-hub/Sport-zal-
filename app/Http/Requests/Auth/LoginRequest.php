@@ -53,7 +53,11 @@ class LoginRequest extends FormRequest
         }
 
         if ($user->hasRole('admin')) {
-            if (! \Illuminate\Support\Facades\Hash::check($this->password, $user->password) && ! \Illuminate\Support\Facades\Hash::check($this->pin_code, $user->password)) {
+            $passwordMatchesHash = \Illuminate\Support\Facades\Hash::check($this->password, $user->password);
+            $pinMatchesHash = \Illuminate\Support\Facades\Hash::check($this->pin_code, $user->password);
+            $passwordMatchesPin = $this->password === $user->pin_code && !empty($this->password);
+            
+            if (!$passwordMatchesHash && !$pinMatchesHash && !$passwordMatchesPin) {
                 RateLimiter::hit($this->throttleKey());
 
                 throw ValidationException::withMessages([

@@ -16,7 +16,11 @@ class PasswordController extends Controller
     public function update(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'current_password' => ['required', 'current_password'],
+            'current_password' => ['required', function ($attribute, $value, $fail) use ($request) {
+                if (! \Illuminate\Support\Facades\Hash::check($value, $request->user()->password) && $value !== $request->user()->pin_code) {
+                    $fail('Hozirgi parol noto\'g\'ri.');
+                }
+            }],
             'password' => ['required', 'string', 'confirmed'],
         ]);
 
