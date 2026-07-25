@@ -3,7 +3,7 @@ import { ref, watch, onMounted } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm, router, usePage } from '@inertiajs/vue3';
 
-defineProps({
+const props = defineProps({
     inventory: Array,
 });
 
@@ -53,6 +53,17 @@ const formReplenish = useForm({
     product_id: '',
     quantity: '',
     total_cost: '',
+});
+
+watch(() => [formReplenish.product_id, formReplenish.quantity], ([newProductId, newQuantity]) => {
+    if (newProductId && newQuantity) {
+        const product = props.inventory.find(p => p.id === newProductId);
+        if (product) {
+            formReplenish.total_cost = product.buy_price * newQuantity;
+        }
+    } else {
+        formReplenish.total_cost = '';
+    }
 });
 
 const submit = () => {
