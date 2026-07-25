@@ -51,6 +51,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/settings', [\App\Http\Controllers\SettingsController::class, 'index'])->name('settings.index');
     Route::put('/settings/ui', [\App\Http\Controllers\SettingsController::class, 'updateUi'])->name('settings.ui');
     Route::put('/settings/pin', [\App\Http\Controllers\SettingsController::class, 'updatePin'])->name('settings.pin');
+
+    // NFC Devices Route
+    Route::resource('nfc-devices', \App\Http\Controllers\NfcDeviceController::class)->except(['create', 'show', 'edit']);
 });
 
 require __DIR__.'/auth.php';
