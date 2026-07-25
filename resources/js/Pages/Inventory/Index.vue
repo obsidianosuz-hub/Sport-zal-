@@ -12,17 +12,6 @@ const activeTab = ref('history'); // 'history' | 'stock'
 const showModal = ref(false);
 const supplierPanel = ref(null);
 
-const focusSupplier = () => {
-    if (supplierPanel.value) {
-        supplierPanel.value.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        // Add a temporary highlight effect
-        supplierPanel.value.classList.add('ring-4', 'ring-indigo-500/50', 'scale-[1.02]', 'transition-all', 'duration-500');
-        setTimeout(() => {
-            supplierPanel.value.classList.remove('ring-4', 'ring-indigo-500/50', 'scale-[1.02]');
-        }, 1500);
-    }
-};
-
 const checkUrlForAdd = () => {
     const params = new URLSearchParams(window.location.search);
     if (params.get('add')) {
@@ -105,9 +94,6 @@ const deleteItem = (id) => {
             <div class="flex justify-between items-center flex-wrap gap-4">
                 <h2 class="text-2xl font-bold text-white tracking-tight">Ombor va Mahsulotlar Kirimi</h2>
                 <div class="flex items-center gap-3">
-                    <button @click="focusSupplier" class="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 active:scale-95 active:from-emerald-500 active:to-emerald-600 active:shadow-[0_0_15px_rgba(16,185,129,0.5)] text-white font-bold rounded-xl shadow-[0_0_15px_rgba(139,92,246,0.5)] transition-all transform hover:-translate-y-0.5">
-                        + Mahsulot Kirim Qilish
-                    </button>
                     <button @click="showModal = true" class="px-5 py-2.5 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-bold rounded-xl shadow-[0_0_10px_rgba(16,185,129,0.3)] transition-all transform hover:-translate-y-0.5">
                         + Yangi Mahsulot
                     </button>
