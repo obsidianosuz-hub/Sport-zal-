@@ -16,7 +16,7 @@ class SalaryController extends Controller
             ->withSum(['salaries as paid_this_month' => function ($query) use ($currentMonth) {
                 $query->where('month', $currentMonth);
             }], 'amount')
-            ->role(['trainer', 'manager', 'cook'])
+            ->role(['trainer', 'manager', 'cook', 'cashier'])
             ->select('id', 'name', 'is_active')
             ->get()
             ->map(function ($user) {
