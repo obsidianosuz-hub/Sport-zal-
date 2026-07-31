@@ -1,10 +1,17 @@
 {
   "nav": {
     "dashboard": "Ana Sayfa",
+    "click_payments": "Click Ödemeleri",
     "employees": "Çalışanlar",
+    "salaries": "Maaşlar",
     "clients": "Müşteriler",
-    "kitchen": "Mutfak",
+    "cashier": "Kasa",
+    "cashier_history": "Kasa Geçmişi",
+    "kitchen": "BAR",
+    "sales_history": "Satış Geçmişi",
     "inventory": "Envanter",
+    "inventory_history": "Envanter Geçmişi",
+    "nfc_devices": "NFC Cihazları",
     "settings": "Ayarlar"
   },
   "auth": {

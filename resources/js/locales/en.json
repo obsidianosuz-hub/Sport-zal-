@@ -1,10 +1,17 @@
 {
   "nav": {
     "dashboard": "Dashboard",
+    "click_payments": "Click Payments",
     "employees": "Employees",
+    "salaries": "Salaries",
     "clients": "Clients",
-    "kitchen": "Kitchen",
+    "cashier": "Cashier",
+    "cashier_history": "Cashier History",
+    "kitchen": "BAR",
+    "sales_history": "Sales History",
     "inventory": "Inventory",
+    "inventory_history": "Inventory History",
+    "nfc_devices": "NFC Devices",
     "settings": "Settings"
   },
   "auth": {

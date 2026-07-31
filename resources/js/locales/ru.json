@@ -1,10 +1,17 @@
 {
   "nav": {
     "dashboard": "Главная",
+    "click_payments": "Оплаты Click",
     "employees": "Сотрудники",
+    "salaries": "Зарплаты",
     "clients": "Клиенты",
-    "kitchen": "Кухня",
+    "cashier": "Касса",
+    "cashier_history": "История кассы",
+    "kitchen": "БАР",
+    "sales_history": "История продаж",
     "inventory": "Склад",
+    "inventory_history": "История склада",
+    "nfc_devices": "NFC Устройства",
     "settings": "Настройки"
   },
   "auth": {

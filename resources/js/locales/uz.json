@@ -1,10 +1,17 @@
 {
   "nav": {
     "dashboard": "Bosh Sahifa",
+    "click_payments": "Click to'lovlari",
     "employees": "Xodimlar",
+    "salaries": "Xodimlar oyligi",
     "clients": "Mijozlar",
+    "cashier": "Kassa",
+    "cashier_history": "Kassa tarixi",
     "kitchen": "BAR",
+    "sales_history": "Sotuvlar tarixi",
     "inventory": "Ombor",
+    "inventory_history": "Ombor tarixi",
+    "nfc_devices": "NFC Qurilmalari",
     "settings": "Sozlamalar"
   },
   "auth": {
