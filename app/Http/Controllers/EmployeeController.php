@@ -115,7 +115,13 @@ class EmployeeController extends Controller
             'permissions' => 'array',
         ]);
 
-        $user->syncPermissions($request->permissions);
+        if ($request->has('permissions') && is_array($request->permissions)) {
+            foreach ($request->permissions as $permissionName) {
+                \Spatie\Permission\Models\Permission::firstOrCreate(['name' => $permissionName, 'guard_name' => 'web']);
+            }
+        }
+
+        $user->syncPermissions($request->permissions ?? []);
 
         return redirect()->back();
     }
