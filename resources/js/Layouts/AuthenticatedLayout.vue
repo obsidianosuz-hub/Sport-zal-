@@ -9,16 +9,47 @@ const showingNavigationDropdown = ref(false);
 const showingNotificationsDropdown = ref(false);
 
 const systemPasswordInput = ref('');
+const rolePasswordInputLockScreen = ref('');
 const systemPasswordError = ref('');
 
 const unlockSystem = () => {
     const validPin = 'admin@1234';
+    
     if (systemPasswordInput.value === validPin) {
         isSystemUnlocked.value = true;
         systemPasswordError.value = '';
-    } else {
+        systemPasswordInput.value = '';
+        rolePasswordInputLockScreen.value = '';
+        return;
+    }
+    
+    if (rolePasswordInputLockScreen.value) {
+        const foundRole = Object.keys(rolePasswords).find(role => rolePasswords[role] === rolePasswordInputLockScreen.value);
+        if (foundRole !== undefined) {
+            selectedRole.value = foundRole;
+            previousRole.value = foundRole;
+            localStorage.setItem('activeRoleFilter', foundRole);
+            isSystemUnlocked.value = true;
+            systemPasswordError.value = '';
+            systemPasswordInput.value = '';
+            rolePasswordInputLockScreen.value = '';
+            
+            const firstAccessible = navigation.find(item => hasAccess(item));
+            if (firstAccessible) {
+                router.visit(route(firstAccessible.route));
+            } else {
+                router.visit(route('dashboard'));
+            }
+            return;
+        }
+    }
+    
+    if (systemPasswordInput.value || rolePasswordInputLockScreen.value) {
         systemPasswordError.value = 'Noto\'g\'ri parol!';
         systemPasswordInput.value = '';
+        rolePasswordInputLockScreen.value = '';
+    } else {
+        systemPasswordError.value = 'Parolni kiriting!';
     }
 };
 
@@ -154,11 +185,30 @@ const cancelRoleSwitch = () => {
                     <input 
                         v-model="systemPasswordInput" 
                         type="password" 
-                        placeholder="Parol" 
-                        class="w-full pl-12 pr-4 py-4 bg-black/40 border border-white/10 rounded-xl text-white text-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-500/50 transition-all placeholder-gray-600" 
+                        placeholder="Asosiy admin paroli" 
+                        class="w-full pl-12 pr-4 py-4 bg-black/40 border border-white/10 rounded-xl text-white text-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-500/50 transition-all placeholder-gray-500" 
                         autofocus 
                     />
                 </div>
+                
+                <div class="flex items-center my-5">
+                    <div class="flex-grow border-t border-white/10"></div>
+                    <span class="px-3 text-gray-500 text-sm font-medium">Yoki ro'lni o'zgartirish</span>
+                    <div class="flex-grow border-t border-white/10"></div>
+                </div>
+
+                <div class="relative mb-8">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    </div>
+                    <input 
+                        v-model="rolePasswordInputLockScreen" 
+                        type="password" 
+                        placeholder="Xodim paroli" 
+                        class="w-full pl-12 pr-4 py-4 bg-black/40 border border-white/10 rounded-xl text-white text-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 transition-all placeholder-gray-500" 
+                    />
+                </div>
+
                 <button type="submit" class="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 active:scale-[0.98] text-white font-bold rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all flex items-center justify-center gap-2">
                     <span>Qulfni ochish</span>
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
