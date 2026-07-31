@@ -11,9 +11,11 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = \App\Models\Client::latest()->get();
+        $clients = \App\Models\Client::with('trainer')->latest()->get();
+        $trainers = \App\Models\User::role('trainer')->get();
         return \Inertia\Inertia::render('Clients/Index', [
-            'clients' => $clients
+            'clients' => $clients,
+            'trainers' => $trainers
         ]);
     }
 
@@ -35,6 +37,7 @@ class ClientController extends Controller
             'phone' => 'nullable|string|max:20',
             'subscription_type' => 'required|in:oddiy,vip',
             'subscription_expires_at' => 'nullable|date',
+            'trainer_id' => 'nullable|exists:users,id',
         ]);
 
         \App\Models\Client::create([
@@ -42,6 +45,7 @@ class ClientController extends Controller
             'phone' => $request->phone,
             'subscription_type' => $request->subscription_type,
             'subscription_expires_at' => $request->subscription_expires_at,
+            'trainer_id' => $request->trainer_id,
         ]);
 
         return redirect()->back();

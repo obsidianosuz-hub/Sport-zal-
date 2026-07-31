@@ -5,6 +5,7 @@ import { Head, useForm, router } from '@inertiajs/vue3';
 
 const props = defineProps({
     clients: Array,
+    trainers: Array,
 });
 
 const showModal = ref(false);
@@ -15,6 +16,7 @@ const form = useForm({
     phone: '+998 ',
     subscription_type: 'oddiy',
     subscription_expires_at: '',
+    trainer_id: '',
 });
 
 const submit = () => {
@@ -69,12 +71,13 @@ const deleteClient = (id) => {
                                 <th class="px-6 py-4">Telefon</th>
                                 <th class="px-6 py-4">Obuna Turi</th>
                                 <th class="px-6 py-4">Obuna Tugashi</th>
+                                <th class="px-6 py-4">Treyner</th>
                                 <th class="px-6 py-4 text-right">Amallar</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-white/5">
                             <tr v-if="clients.length === 0">
-                                <td colspan="5" class="px-6 py-8 text-center text-gray-500">Hozircha mijozlar mavjud emas</td>
+                                <td colspan="6" class="px-6 py-8 text-center text-gray-500">Hozircha mijozlar mavjud emas</td>
                             </tr>
                             <tr v-for="client in clients" :key="client.id" class="hover:bg-white/5 transition-colors">
                                 <td class="px-6 py-4">
@@ -88,6 +91,10 @@ const deleteClient = (id) => {
                                     <span :class="client.subscription_type === 'vip' ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' : 'bg-blue-500/20 text-blue-400 border-blue-500/30'" class="px-3 py-1 rounded-full text-xs font-bold border uppercase">{{ client.subscription_type }}</span>
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-400">{{ client.subscription_expires_at ?? '—' }}</td>
+                                <td class="px-6 py-4 text-sm font-medium">
+                                    <span v-if="client.trainer" class="text-blue-400">{{ client.trainer.name }}</span>
+                                    <span v-else class="text-gray-500">—</span>
+                                </td>
                                 <td class="px-6 py-4 text-right">
                                     <div class="flex items-center justify-end">
                                         <button class="text-green-400 hover:text-green-300 mx-2 font-medium transition-colors border border-green-400/30 px-3 py-1 rounded-lg bg-green-400/10">Tashrif yozish</button>
@@ -134,6 +141,14 @@ const deleteClient = (id) => {
                             <input v-model="form.subscription_expires_at" type="date" class="w-full bg-black/40 border border-white/10 rounded-xl text-white px-4 py-2 focus:ring-2 focus:ring-blue-500/50">
                             <p v-if="form.errors.subscription_expires_at" class="text-red-400 text-xs mt-1">{{ form.errors.subscription_expires_at }}</p>
                         </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-1">Treyner (Ixtiyoriy)</label>
+                        <select v-model="form.trainer_id" class="w-full bg-black/40 border border-white/10 rounded-xl text-white px-4 py-2 focus:ring-2 focus:ring-blue-500/50">
+                            <option value="">— Treyner tanlanmagan —</option>
+                            <option v-for="trainer in trainers" :key="trainer.id" :value="trainer.id">{{ trainer.name }}</option>
+                        </select>
+                        <p v-if="form.errors.trainer_id" class="text-red-400 text-xs mt-1">{{ form.errors.trainer_id }}</p>
                     </div>
 
                     <div class="mt-6 flex justify-end gap-3 pt-4 border-t border-white/10">
