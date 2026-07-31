@@ -134,10 +134,10 @@ const toggleActive = (emp) => {
         </template>
 
         <!-- Grid Layout -->
-        <div class="mt-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-5 gap-6">
             
             <!-- Left Side: Table -->
-            <div class="lg:col-span-3">
+            <div class="lg:col-span-4">
                 <!-- Glass Panel for Table -->
                 <div class="relative group">
             <div class="absolute inset-0 bg-gradient-to-r from-emerald-600/20 to-teal-600/20 rounded-2xl blur-xl"></div>
